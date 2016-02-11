@@ -45,7 +45,7 @@ public class Problems {
 		 
 		while (fibnum[i] < 4000000) {
 		    sum += fibnum[i];
-		    i = (i + 1) % 2;
+		    i = (i+1) % 2;
 		    fibnum[i] = 4 * fibnum[(i + 1) % 2] + fibnum[i];
 		}
 		
@@ -104,8 +104,68 @@ public class Problems {
     	 * two 2-digit numbers is 9009 = 91 × 99. Find the largest palindrome made from the product of 
     	 * two 3-digit numbers.
     	 * */
+    	
+    	String palString;
+        int strln;
+        int answer = 0;
+        
+        for (int c1 = 100; c1<=999; c1++)
+        {
+        	for (int c2 = 100; c2<=999; c2++)
+        	{
+        		int prod = c1*c2;
+        		palString = "" + prod;
+        		strln = palString.length();
+            
+        		for(int x = 1; x<=strln/2 ; x++)
+        		{
+        			if (palString.charAt(x-1) == palString.charAt(strln-(x)) && (x)!= (strln/2))
+        			{
+        				continue;
+        			}
+              
+        			else if (palString.charAt(x-1) != palString.charAt(strln -(x)))
+        			{
+        				break;
+        			}
+        			else if (palString.charAt(x-1) == palString.charAt(strln-(x)) && (x)== (strln/2))
+        			{
+        				if(answer<prod)
+        				{
+        					answer = prod;
+        					continue;
+        				}
+        				else
+        				{
+        					continue;
+        				}
+        			}
+        		}
+        	}
+        }
+        System.out.println(answer);
     }
-    
-
-    
+    public static void problem5()
+    {
+    	/*2520 is the smallest number that can be divided by each of the numbers from 
+    	 * 1 to 10 without any remainder. What is the smallest positive number that is 
+    	 * evenly divisible by all of the numbers from 1 to 20?
+    	 * */
+    	int[] numberlist = new int[20];
+        for(int i=0; i<20; i++){
+            numberlist[i] = i+1;
+        }
+        int answer =1;
+        for(int i =0; i<numberlist.length;i++){
+                if(numberlist[i]!=1){
+                    answer *= numberlist[i];
+                    for(int j=numberlist.length-1; j>=i ;j--){
+                        if(numberlist[j]%numberlist[i]==0){
+                            numberlist[j]=numberlist[j]/numberlist[i];
+                        }
+                    }
+                }
+        }
+        System.out.println(answer); 
+    }
 }
